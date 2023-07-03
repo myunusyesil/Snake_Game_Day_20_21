@@ -7,6 +7,7 @@ LEFT = 180
 DOWN = 270
 RIGHT = 0
 
+
 class Snake:
     def __init__(self):
         # Starting positions of each segment, and they will create the whole snake together
@@ -26,11 +27,19 @@ class Snake:
 
     def create_snake(self):
         for position in STARTING_POSITIONS:
-            new_segment = Turtle("square")
-            new_segment.color("white")
-            new_segment.penup()
-            new_segment.goto(position)
-            self.segments.append(new_segment)
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        length = len(self.segments)
+
+        self.add_segment(self.segments[-1].pos())
 
     def turn_east(self):
         if self.head.heading() != LEFT:
